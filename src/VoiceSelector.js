@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import EasySpeech from 'easy-speech'
 
-const VoiceSelector = ({ selected = 0, setSelectedVoice, setSelectedIndex, synth }) => {
+const VoiceSelector = ({ selected = 0, setSelectedVoice, setSelectedIndex, synth, setLanguage }) => {
     const [voices, setVoices] = useState([]);
   
     const populateVoiceList = useCallback(() => {
@@ -12,6 +12,7 @@ const VoiceSelector = ({ selected = 0, setSelectedVoice, setSelectedIndex, synth
     const handleOnSelected = (e) => {
         setSelectedVoice(voices[e.target.value]);
         setSelectedIndex(e.target.value);
+        setLanguage(voices[e.target.value].lang)
         }
 
     useEffect(() => {

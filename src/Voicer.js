@@ -1,11 +1,13 @@
 import React , {useState} from 'react';
 import VoiceSelector from './VoiceSelector';
+import Dictaphone from './Dictaphone';
 import EasySpeech from 'easy-speech'
 
 const Voicer = () => {
   const [textValue, setTextValue] = useState('');
   const [selectedVoice, setSelectedVoice] = useState();
   const [selectedIndex, setSelectedIndex] = useState();
+  const [language, setLanguage] = useState('en-US');
   
   let synth = EasySpeech.detect()
   EasySpeech.init({ maxTimeout: 5000, interval: 250 })
@@ -18,7 +20,7 @@ const Voicer = () => {
     await EasySpeech.speak({
       text: textValue,
       voice: selectedVoice, // optional, will use a default or fallback
-      pitch: 2,
+      pitch: 1.2,
       rate: 1,
       volume: 1,
       // there are more events, see the API for supported events
@@ -31,15 +33,11 @@ const Voicer = () => {
 
   
     return (
-      <form onSubmit={speak}>
-        <input
-          type="text"
-          value={textValue}
-          onChange={(e) => setTextValue(e.target.value)}
-        />
-        <VoiceSelector selected={selectedIndex} setSelectedVoice={setSelectedVoice} setSelectedIndex={setSelectedIndex} synth={synth} />
-        <button type="submit">Speak</button>
-      </form>
+        <div>
+            <Dictaphone setTextValue={setTextValue} language={language}></Dictaphone>
+            <VoiceSelector selected={selectedIndex} setSelectedVoice={setSelectedVoice} setSelectedIndex={setSelectedIndex} synth={synth} setLanguage={setLanguage} />
+            <button onClick={speak}>Speak</button>
+        </div>
     );
 };
 
