@@ -25,8 +25,11 @@ const Dictaphone = ({setTextValue, language}) => {
   return (
     <div>
       <p>Microphone: {listening ? 'on' : 'off'}</p>
-      <button onClick={handleStart}>Start</button>
-      <button onClick={handleStop}>Stop</button>
+      { listening ? 
+        <button onClick={handleStop}>Stop</button>
+        :
+        <button onClick={handleStart}>Start</button>
+      }
       <button onClick={resetTranscript}>Reset</button>
       <p>{transcript}</p>
     </div>

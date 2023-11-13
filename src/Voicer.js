@@ -20,7 +20,7 @@ const Voicer = () => {
     await EasySpeech.speak({
       text: textValue,
       voice: selectedVoice, // optional, will use a default or fallback
-      pitch: 1.2,
+      pitch: 1,
       rate: 1,
       volume: 1,
       // there are more events, see the API for supported events
